@@ -1,27 +1,35 @@
-#include <bits/stdc++.h>
-
+#include<iostream>
+#include<stack>
 using namespace std;
 
+
+// Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 class MinStack {
 public:
     stack<int> s;
-    int min = INT_MAX;
+    stack<int> minS;
     MinStack() {
         
     }
     
     void push(int val) {
-        if(val < min){
-            min = val;
+        if(minS.empty()){
+            s.push(val);
+            minS.push(val);
         }
-        s.push(val);
+        else if(val < minS.top()){
+            s.push(val);
+            minS.push(val);
+        }
+        else{
+            s.push(val);
+            minS.push(minS.top());
+        }
     }
     
     void pop() {
-        if(s.top() == min){
-            
-        }
         s.pop();
+        minS.pop();
     }
     
     int top() {
@@ -29,7 +37,7 @@ public:
     }
     
     int getMin() {
-        return min;
+        return minS.top();
     }
 };
 

@@ -12,33 +12,19 @@ using namespace std;
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int x = 0;
-        int y = 0;
-        long i = 1;
-        while(l1){
-            x += l1->val * 10;
-            i *= 10;
-            l1 = l1->next;
-        }
-        i = 1;
-        while(l2){
-             y += l2->val * 10;
-             y *= 10;
-             l2 = l2->next;
-        }
-        int result = x + y;
+        int carry = 0;
         ListNode* head;
-        while(result != 0){
-            int t = result % 10;
-            result /= 10; 
-            ListNode* a = new ListNode(t);
-            head->next = a;
-            head = head->next;
+        ListNode* current = head;
+        while(l1 && l2){
+            int sum = l1->val + l2->val;
+            sum += carry;
+            carry = 0;
+            if(sum > 9){
+                ListNode* temp = new ListNode(sum % 10);
+                carry = sum / 10;
+                current->next = temp;
+            }
         }
-        return head->next;
     }
 };
 
-int main(){
-
-}

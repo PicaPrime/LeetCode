@@ -17,7 +17,9 @@ class Solution{
 public:
     vector<int> inorderTraversal(TreeNode *root)
     {
-        if(root->left == nullptr)
+        if(root->left == nullptr){
+            
+        }
     }
 };
 
