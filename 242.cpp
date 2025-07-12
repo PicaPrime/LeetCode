@@ -1,29 +1,33 @@
-#include <bits/stdc++.h>
 
+#include<iostream>
+#include<map>
+#include<vector>
 using namespace std;
 
 class Solution {
 public:
     bool isAnagram(string s, string t) {
         
+        map<char, int> m;
+
         if(s.length() != t.length()) return false;
-
-        int arr[26] = {0};
-
-        for(int i=0 ; i< s.length() ; i++){
-            int x = s[i] - 'a';
-            int y = t[i] - 'a';
-            arr[x]++;
-            arr[y]--;
+        int length = s.length();
+        for(int i=0 ; i < length ; i++){
+            m[s[i]]++;
+            m[t[i]]--;
         }
-        for(int i=0 ; i< 26 ; i++){
-            if(arr[i] != 0) return false;
+
+        for(auto x : m){
+            if(x.second != 0) return false;
         }
+
         return true;
+        
     }
 };
 
 int main(){
     Solution o;
-    o.isAnagram("poke", "poke");
+    if(o.isAnagram("poke", "kert")) cout << "true" ; 
+    else cout << "NO";
 }
